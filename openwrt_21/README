@@ -1,0 +1,4 @@
+Scripts to build OpenWRT for Banana pi R64.
+
+	1. /scripts/fetch.sh
+		-Fetches required source files from openwrt.org

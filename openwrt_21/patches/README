@@ -1,0 +1,8 @@
+
+
+600-regdb-21-ITS.patch		->	package/firmware/wireless-regdb/patches/600-regdb-21-ITS.patch
+998-ath5k_ocb.patch		->	package/kernel/mac80211/patches/ath/998-ath5k_ocb.patch
+998-ath9k_allow_11p.patch	->	package/kernel/mac80211/patches/ath/998-ath9k_allow_11p.patch
+999-Enable-queueing-in-all-4-ACs-BE-BK-VI-VO.patch	-> 	package/kernel/mac80211/patches/ath/999-Enable-queueing-in-all-4-ACs-BE-BK-VI-VO.patch
+999-Get-hw-queue-pending-stats-from-ath9k-via-netlink.patch	->	package/kernel/mac80211/patches/ath/999-Get-hw-queue-pending-stats-from-ath9k-via-netlink.patch
+999-ITS-G5D-channels-fix.patch	->	package/kernel/mac80211/patches/ath/999-ITS-G5D-channels-fix.patch
