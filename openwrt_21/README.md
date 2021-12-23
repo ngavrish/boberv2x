@@ -1,5 +1,10 @@
 Scripts to build OpenWRT for Banana pi R64(at the moment using R2).
 
+### TODO
+- Inside the openwrt configure network
+- Improve the the script
+- Prepare config file for the Banana Pi R64
+
 ### Requirements
 As mentioned on [OpenWRT](https://openwrt.org/docs/guide-developer/build-system/install-buildsystem) need to be installed
 
