@@ -16,14 +16,22 @@ VERBOSE=false
 ##############################################
 die() { echo "$*" 1>&2 ; exit 1; }
 
-image_fetch() {
-    [ `basename $PWD` == openwrt_21 ] || { echo This script must be executed from openwrt_21 root directory; exit -1; }
-
+source_download(){
     [ -d openwrt ] || { git clone ${SOURCE} || fail "ERROR: git clone failed. Aborting. "; }
     cd openwrt
-    git fetch
-    # git checkout ${OPENWRT_TAG} || fail "ERROR: git checkout failed. Aborting."
+    git pull
+    git fetch -t
+    git checkout ${OPENWRT_TAG} || fail "ERROR: git checkout failed. Aborting."
+}
 
+source_fetch() {
+    [ `basename $PWD` == openwrt_21 ] || { echo This script must be executed from openwrt_21 root directory; exit -1; }
+
+    [ -d openwrt ] || { source_download || fail "ERROR: git clone failed. Aborting. "; }
+    cd openwrt
+
+    make distclean
+    ./scripts/feeds clean
     ./scripts/feeds update -a
     ./scripts/feeds install -a
     cd ../
@@ -38,7 +46,8 @@ image_build() {
     cd openwrt
     make defconfig
     make download
-    make -j4 V=s
+    # make -j4 V=s
+    make -j4
 }
 
 image_configure(){
@@ -73,7 +82,7 @@ HELP
 
 while [ -n "$1" ]; do
     case $1 in
-    -d) image_fetch; exit 0;;
+    -d) source_fetch; exit 0;;
     -b) image_build; exit 0;;
     -h) usage; exit 0 ;;
     *)
