@@ -30,8 +30,8 @@ source_fetch() {
     [ -d openwrt ] || { source_download || fail "ERROR: git clone failed. Aborting. "; }
     cd openwrt
 
-    make distclean
-    ./scripts/feeds clean
+    # make distclean
+    # ./scripts/feeds clean
     ./scripts/feeds update -a
     ./scripts/feeds install -a
     cd ../
