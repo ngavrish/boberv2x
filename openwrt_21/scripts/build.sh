@@ -48,9 +48,9 @@ image_build() {
     cd openwrt
     make defconfig
     make download
-    make -j4 V=s
+    make -j9 V=s
     # make -j9
-    cd ../
+    # cd ../
 }
 
 image_configure(){

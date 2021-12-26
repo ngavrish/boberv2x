@@ -1,0 +1,48 @@
+#!/bin/sh
+
+if ! uci show firewall | grep name | grep ssh >/dev/null
+then 
+
+uci add firewall rule
+uci set firewall.@rule[-1].name='luci'
+uci set firewall.@rule[-1].src='wan'
+uci set firewall.@rule[-1].target='ACCEPT'
+uci set firewall.@rule[-1].proto='tcp'
+uci set firewall.@rule[-1].dest_port='443'
+uci commit 
+
+uci add firewall rule
+uci set firewall.@rule[-1].name='ssh'
+uci set firewall.@rule[-1].src='wan'
+uci set firewall.@rule[-1].target='ACCEPT'
+uci set firewall.@rule[-1].proto='tcp'
+uci set firewall.@rule[-1].dest_port='22'
+uci commit 
+
+uci add firewall rule
+uci set firewall.@rule[-1].name='luci'
+uci set firewall.@rule[-1].src='wan'
+uci set firewall.@rule[-1].target='ACCEPT'
+uci set firewall.@rule[-1].proto='tcp'
+uci set firewall.@rule[-1].dest_port='80'
+uci commit 
+
+/etc/init.d/firewall restart
+
+fi
+
+if [ "`uci get wireless.llback 2>/dev/null`" != "wifi-iface" ]
+then 
+	uci set wireless.llback=wifi-iface
+	uci set wireless.llback.device='radio0'
+	uci set wireless.llback.mode='sta'
+	uci set wireless.llback.ssid='llback'
+	uci set wireless.llback.encryption='psk2'
+	uci set wireless.llback.key='SuperSecret'
+	uci set wireless.llback.network='llback'
+        uci commit 
+        /etc/init.d/network reload
+fi
+
+
+exit 0
