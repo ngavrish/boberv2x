@@ -1,0 +1,3 @@
+config wifi-iface 'default_radio'
+        option device 'radio0'
+        option network 'wwan'

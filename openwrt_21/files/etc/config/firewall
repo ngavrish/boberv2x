@@ -1,0 +1,20 @@
+config rule                                                                     
+        option name 'luci'                                                      
+        option src 'wan'                                                        
+        option target 'ACCEPT'                                                  
+        option proto 'tcp'                                                      
+        option dest_port '443'           
+                                                                                
+config rule                                                                     
+        option name 'ssh'                                                       
+        option src 'wan'                                                        
+        option target 'ACCEPT'                                                  
+        option proto 'tcp'                                                      
+        option dest_port '22'                                        
+                                                                                
+config rule                                                                     
+        option name 'luci'                                                      
+        option src 'wan'                                                        
+        option target 'ACCEPT'                                                  
+        option proto 'tcp'                                                      
+        option dest_port '80'

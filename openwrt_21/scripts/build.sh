@@ -7,7 +7,7 @@ SOURCE="https://github.com/bkukanov/openwrt.git"
 MIRROR="https://git.openwrt.org/openwrt/openwrt.git"
 RELEASE="latest"
 TARGET="mediatek/mt7622"
-OPENWRT_TAG="openwrt-21.02"
+OPENWRT_TAG="bpir2nov27"
 DESTINATION="."
 FILES=""
 COMMAND=""
@@ -44,7 +44,7 @@ image_build() {
 
     [ `basename $PWD` == openwrt_21 ] || { echo This script must be executed from openwrt_21 root directory; exit -1; }
     [ -d openwrt ] || { source_download || fail "ERROR: can't download the openwrt "; }
-    source_fetch
+    # source_fetch
     cd openwrt
     make defconfig
     make download
