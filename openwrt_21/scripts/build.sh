@@ -3,11 +3,11 @@
 # Default configuration (file) to use
 config_name="bpir2"
 
-SOURCE="https://github.com/openwrt/openwrt.git"
+SOURCE="https://github.com/bkukanov/openwrt.git"
 MIRROR="https://git.openwrt.org/openwrt/openwrt.git"
 RELEASE="latest"
 TARGET="mediatek/mt7622"
-OPENWRT_TAG=v21.02.1
+OPENWRT_TAG="openwrt-21.02"
 DESTINATION="."
 FILES=""
 COMMAND=""
@@ -21,8 +21,7 @@ source_download(){
     cd openwrt
     git pull
     git fetch -t
-    git checkout ${OPENWRT_TAG} || fail "ERROR: git checkout failed. Aborting."
-    echo "src-git boberv2x git@github.com:ngavrish/boberv2x.git" >> feeds.conf.default
+    # echo "src-git boberv2x git@github.com:ngavrish/boberv2x.git" >> feeds.conf.default
     cd ../
 }
 
@@ -31,7 +30,7 @@ source_fetch() {
 
     [ -d openwrt ] || { source_download || fail "ERROR: git clone failed. Aborting. "; }
     cd openwrt
-
+    git checkout ${OPENWRT_TAG} || fail "ERROR: git checkout failed. Aborting."
     make distclean
     ./scripts/feeds clean
     ./scripts/feeds update -a
@@ -44,12 +43,13 @@ image_build() {
     echo "make image"
 
     [ `basename $PWD` == openwrt_21 ] || { echo This script must be executed from openwrt_21 root directory; exit -1; }
-    [ -d openwrt ] || { source_fetch || fail "ERROR: can't download the openwrt "; }
+    [ -d openwrt ] || { source_download || fail "ERROR: can't download the openwrt "; }
+    source_fetch
     cd openwrt
     make defconfig
     make download
-    make -j9 V=s
-    # make -j9
+    # make -j9 V=s
+    make -j9
     # cd ../
 }
 
@@ -87,6 +87,7 @@ while [ -n "$1" ]; do
     case $1 in
     -d) source_fetch; exit 0;;
     -b) image_build; exit 0;;
+    -c) image_configure; exit 0 ;;
     -h) usage; exit 0 ;;
     *)
         usage
