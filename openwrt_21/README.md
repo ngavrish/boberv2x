@@ -15,7 +15,7 @@ make4.1+ perl python3.6+ rsync subversion unzip which
 
 ### Quickstart
 	- scripts/build.sh
-		-d Downloadn and Fetches required source files from https://github.com/openwrt/openwrt
+		-d Download and Fetches required source files from https://github.com/openwrt/openwrt
 		-b Will build the image
 
 In order to enable the WAN port accesible over the LUCI should to add this line on `/etc/config/firewall` 

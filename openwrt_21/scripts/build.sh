@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Default configuration (file) to use
-config_name="bpir2"
+config_name="bpir64"
 
 SOURCE="https://git.openwrt.org/openwrt/openwrt.git"
 MIRROR="https://github.com/bkukanov/openwrt.git"
@@ -46,7 +46,7 @@ image_build() {
 
     [ `basename $PWD` == openwrt_21 ] || { echo This script must be executed from openwrt_21 root directory; exit -1; }
     [ -d openwrt ] || { source_download || fail "ERROR: can't download the openwrt "; }
-    source_fetch
+    # source_fetch
     cd openwrt
     make defconfig
     make download
