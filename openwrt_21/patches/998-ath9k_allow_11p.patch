@@ -1,7 +1,7 @@
-Index: backports-5.10.68-1/drivers/net/wireless/ath/ath9k/common-init.c
+Index: backports-5.15.8-1/drivers/net/wireless/ath/ath9k/common-init.c
 ===================================================================
---- backports-5.10.68-1.orig/drivers/net/wireless/ath/ath9k/common-init.c
-+++ backports-5.10.68-1/drivers/net/wireless/ath/ath9k/common-init.c
+--- backports-5.15.8-1.orig/drivers/net/wireless/ath/ath9k/common-init.c
++++ backports-5.15.8-1/drivers/net/wireless/ath/ath9k/common-init.c
 @@ -86,6 +86,27 @@ static const struct ieee80211_channel at
  	CHAN5G(5785, 35), /* Channel 157 */
  	CHAN5G(5805, 36), /* Channel 161 */
@@ -30,10 +30,10 @@ Index: backports-5.10.68-1/drivers/net/wireless/ath/ath9k/common-init.c
  };
  
  /* Atheros hardware rate code addition for short preamble */
-Index: backports-5.10.68-1/drivers/net/wireless/ath/ath9k/hw.h
+Index: backports-5.15.8-1/drivers/net/wireless/ath/ath9k/hw.h
 ===================================================================
---- backports-5.10.68-1.orig/drivers/net/wireless/ath/ath9k/hw.h
-+++ backports-5.10.68-1/drivers/net/wireless/ath/ath9k/hw.h
+--- backports-5.15.8-1.orig/drivers/net/wireless/ath/ath9k/hw.h
++++ backports-5.15.8-1/drivers/net/wireless/ath/ath9k/hw.h
 @@ -74,7 +74,7 @@
  
  #define ATH9K_RSSI_BAD			-128
@@ -43,10 +43,10 @@ Index: backports-5.10.68-1/drivers/net/wireless/ath/ath9k/hw.h
  
  /* Register read/write primitives */
  #define REG_WRITE(_ah, _reg, _val) \
-Index: backports-5.10.68-1/drivers/net/wireless/ath/regd.c
+Index: backports-5.15.8-1/drivers/net/wireless/ath/regd.c
 ===================================================================
---- backports-5.10.68-1.orig/drivers/net/wireless/ath/regd.c
-+++ backports-5.10.68-1/drivers/net/wireless/ath/regd.c
+--- backports-5.15.8-1.orig/drivers/net/wireless/ath/regd.c
++++ backports-5.15.8-1/drivers/net/wireless/ath/regd.c
 @@ -47,9 +47,9 @@ static struct reg_dmn_pair_mapping *ath_
  #define ATH_5GHZ_5150_5350	REG_RULE(5150-10, 5240+10, 80, 0, 30, 0),\
  				REG_RULE(5260-10, 5350+10, 80, 0, 30,\

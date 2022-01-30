@@ -7,7 +7,7 @@ SOURCE="https://git.openwrt.org/openwrt/openwrt.git"
 MIRROR="https://github.com/bkukanov/openwrt.git"
 RELEASE="latest"
 TARGET="mediatek/mt7622"
-OPENWRT_TAG=7fd1ca96a13112a7ea214b3baf076cd81d712378
+OPENWRT_TAG=b21bc3479d46e6a4c3cc6bf7c245d4b0ddccb7db
 DESTINATION="."
 FILES=""
 COMMAND=""
@@ -21,6 +21,8 @@ source_download(){
     cd openwrt
     git pull
     git fetch -t
+    git checkout ${OPENWRT_TAG} || fail "ERROR: git checkout failed. Aborting."
+    cp ../configs/feeds.conf.default feeds.conf.default
     # echo "src-git boberv2x git@github.com:ngavrish/boberv2x.git" >> feeds.conf.default
     cd ../
 }
@@ -30,9 +32,9 @@ source_fetch() {
 
     [ -d openwrt ] || { source_download || fail "ERROR: git clone failed. Aborting. "; }
     cd openwrt
-    git checkout ${OPENWRT_TAG} || fail "ERROR: git checkout failed. Aborting."
-    make distclean
-    ./scripts/feeds clean
+    git pull
+    #make distclean
+    #./scripts/feeds clean
     ./scripts/feeds update -a
     ./scripts/feeds install -a
     cd ../
@@ -44,7 +46,7 @@ image_build() {
 
     [ `basename $PWD` == openwrt_21 ] || { echo This script must be executed from openwrt_21 root directory; exit -1; }
     [ -d openwrt ] || { source_download || fail "ERROR: can't download the openwrt "; }
-    # source_fetch
+    source_fetch
     cd openwrt
     make defconfig
     make download
@@ -62,7 +64,7 @@ image_configure(){
     cp patches/999-Enable-queueing-in-all-4-ACs-BE-BK-VI-VO.patch   openwrt/package/kernel/mac80211/patches/ath/999-Enable-queueing-in-all-4-ACs-BE-BK-VI-VO.patch
     cp patches/999-Get-hw-queue-pending-stats-from-ath9k-via-netlink.patch  openwrt/package/kernel/mac80211/patches/ath/999-Get-hw-queue-pending-stats-from-ath9k-via-netlink.patch
     cp patches/999-ITS-G5D-channels-fix.patch                       openwrt/package/kernel/mac80211/patches/ath/999-ITS-G5D-channels-fix.patch
-    cp ./patches/iperf/*.patch                                      openwrt/feeds/packages/net/iperf/patches
+    # cp ./patches/iperf/*.patch                                      openwrt/feeds/packages/net/iperf/patches
 
     cp ./configs/${config_name}                                     openwrt/.config
 }
