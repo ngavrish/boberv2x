@@ -3,11 +3,11 @@
 # Default configuration (file) to use
 config_name="bpir2"
 
-SOURCE="https://github.com/bkukanov/openwrt.git"
-MIRROR="https://git.openwrt.org/openwrt/openwrt.git"
+SOURCE="https://git.openwrt.org/openwrt/openwrt.git"
+MIRROR="https://github.com/bkukanov/openwrt.git"
 RELEASE="latest"
 TARGET="mediatek/mt7622"
-OPENWRT_TAG="bpir2nov27"
+OPENWRT_TAG=7fd1ca96a13112a7ea214b3baf076cd81d712378
 DESTINATION="."
 FILES=""
 COMMAND=""
